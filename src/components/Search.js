@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import useMovie from "./useMovie";
 
 function Search() {
-  const { movies } = useMovie();
+  const { movies, filtered, setFiltered } = useMovie();
   const [query, setQuery] = useState("");
 
   const handleSearch = (e) => {
@@ -16,8 +16,12 @@ function Search() {
         )
       );
       console.log("filtered", filteredMovies);
+      setFiltered([...filteredMovies]);
+      console.log("filtered state", filtered);
     } else {
       filteredMovies = [];
+      // setQuery("");
+      setFiltered([]);
     }
   };
   // console.log(query);

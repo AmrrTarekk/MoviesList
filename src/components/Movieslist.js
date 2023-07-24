@@ -7,7 +7,9 @@ function Movieslist() {
   useEffect(() => {
     console.log("change");
   }, []);
-  const show = movies;
+  console.log("Fe eh filter", filtered);
+
+  let show = filtered === [] ? movies : filtered;
   console.log(show, "show");
 
   return (
