@@ -32,6 +32,7 @@ function Movieform() {
       return;
     }
     handleAddMovie(movieName, rating, duration);
+    console.log(movieName, rating, duration);
   };
 
   useEffect(() => {

@@ -18,7 +18,7 @@ function App() {
         </div>
         <div className="layout-column w-30">
           <Search />
-          {filteredMovies === [] ? (
+          {filteredMovies !== [] ? (
             <Movieslist />
           ) : (
             <div data-testid="noResult">
