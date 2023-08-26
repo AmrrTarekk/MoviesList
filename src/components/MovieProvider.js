@@ -1,4 +1,4 @@
-import React, { createContext, useState } from "react";
+import React, { createContext, useEffect, useState } from "react";
 
 const MovieContext = createContext({});
 
@@ -14,8 +14,10 @@ export const MovieProvider = ({ children }) => {
         name: movieName,
         rating,
         duration,
+        id: crypto.randomUUID(),
       },
     ]);
+    console.log(movies, "moviesContext");
   };
 
   let filteredMovies = movies;
@@ -28,7 +30,14 @@ export const MovieProvider = ({ children }) => {
 
   return (
     <MovieContext.Provider
-      value={{ handleAddMovie, filteredMovies, query, setQuery }}
+      value={{
+        handleAddMovie,
+        filteredMovies,
+        query,
+        movies,
+        setMovies,
+        setQuery,
+      }}
     >
       {children}
     </MovieContext.Provider>

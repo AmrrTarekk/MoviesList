@@ -2,16 +2,22 @@ import React, { useEffect } from "react";
 import useMovie from "./useMovie";
 
 function Movieslist() {
-  const { filteredMovies } = useMovie();
+  const { filteredMovies, movies, setMovies } = useMovie();
 
   console.log("Fe eh filter", filteredMovies);
+  const handleClose = (id) => {
+    console.log(movies, id);
+    setMovies(() => {
+      return movies.filter((movie) => movie.id !== id);
+    });
+  };
 
   return (
     <section>
       <ul className="styled w-100 pl-0" data-testid="moviesList">
         {filteredMovies.map((movie, index) => (
           <li
-            key={index}
+            key={movie.id}
             className="flex slide-up-fade-in justify-content-between"
             style={{ borderBottom: "2px solid var(--primary-color)" }}
           >
@@ -25,6 +31,7 @@ function Movieslist() {
               {/* use this paragraph for movie duration, for example: '2.5 Hrs' */}
               <p className="justify-content-end">{movie.duration}</p>
             </div>
+            <button onClick={() => handleClose(movie.id)}>close</button>
           </li>
         ))}
       </ul>

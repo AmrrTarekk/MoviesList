@@ -9,6 +9,7 @@ const title = "Favorite Movie Directory";
 // https://github.com/anjantalatam/favorite-movie-directory-hackerrank
 function App() {
   const { filteredMovies } = useMovie();
+  console.log(filteredMovies);
   return (
     <div>
       <h8k-navbar header={title} />
@@ -18,13 +19,20 @@ function App() {
         </div>
         <div className="layout-column w-30">
           <Search />
-          {filteredMovies !== [] ? (
+          {filteredMovies.length === 0 ? (
+            <div data-testid="noResult">
+              <h3 className="text-center">No Results Found</h3>
+            </div>
+          ) : (
+            <Movieslist />
+          )}
+          {/* {filteredMovies === [] ? (
             <Movieslist />
           ) : (
             <div data-testid="noResult">
               <h3 className="text-center">No Results Found</h3>
             </div>
-          )}
+          )} */}
         </div>
       </div>
     </div>

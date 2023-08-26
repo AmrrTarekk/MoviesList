@@ -33,6 +33,9 @@ function Movieform() {
     }
     handleAddMovie(movieName, rating, duration);
     console.log(movieName, rating, duration);
+    setMovieName("");
+    setRate("");
+    setDuration("");
   };
 
   useEffect(() => {
