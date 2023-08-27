@@ -1,8 +1,16 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import useMovie from "./useMovie";
 
+const EMAIL_REGEX =
+  /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
+
 function Movieform() {
+  const nameRef = useRef();
+
   const [movieName, setMovieName] = useState("");
+  const [validName, setValidName] = useState(false);
+  const [nameFocus, setNameFocus] = useState(false);
+
   const [rating, setRate] = useState("");
   const [duration, setDuration] = useState("");
   const [err, setErr] = useState(false);
@@ -38,6 +46,18 @@ function Movieform() {
     setDuration("");
   };
 
+  // useEffect(() => {}, []);
+  useEffect(() => {
+    nameRef.current.focus();
+    console.log(nameFocus);
+  }, []);
+
+  useEffect(() => {
+    const result = EMAIL_REGEX.test(movieName);
+    console.log(result);
+    setValidName(result);
+  }, [movieName]);
+
   useEffect(() => {
     if (movieName !== "" || rating !== "" || duration !== "") {
       setErr(false);
@@ -56,18 +76,30 @@ function Movieform() {
               type="text"
               id="name"
               value={movieName}
+              ref={nameRef}
+              required
+              autoComplete="off"
+              onFocus={() => setNameFocus(true)}
+              onBlur={() => setNameFocus(false)}
               placeholder="Enter Movie Name"
               data-testid="nameInput"
               onChange={(e) => setMovieName(e.target.value)}
             />
+            <p
+              className={!validName && nameFocus ? "instructions" : "offscreen"}
+            >
+              Invalid Name
+            </p>
           </div>
           <div className="layout-column mb-15">
             <label htmlFor="ratings" className="mb-3">
               Ratings
             </label>
             <input
+              required
               type="number"
               id="ratings"
+              autoComplete="off"
               value={rating}
               placeholder="Enter Rating on a scale of 1 to 100"
               data-testid="ratingsInput"
@@ -81,6 +113,8 @@ function Movieform() {
             <input
               type="text"
               id="duration"
+              required
+              autoComplete="off"
               value={duration}
               placeholder="Enter duration in hours or minutes"
               data-testid="durationInput"
