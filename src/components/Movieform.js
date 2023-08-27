@@ -44,10 +44,11 @@ function Movieform() {
     }
     // console.log(imageSrc);
     handleAddMovie(movieName, rating, duration, selectedImage);
-    console.log(movieName, rating, duration);
-    setMovieName("");
-    setRate("");
-    setDuration("");
+    console.log(movieName, rating, duration, selectedImage);
+    // setMovieName("");
+    // setRate("");
+    // setDuration("");
+    setSelectedImage(null);
   };
 
   // useEffect(() => {}, []);
@@ -133,8 +134,6 @@ function Movieform() {
           )}
           {/* Testing Image */}
           <div>
-            <h1>Upload and Display Image usign React Hook's</h1>
-
             {selectedImage && (
               <div>
                 <img

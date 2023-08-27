@@ -1,5 +1,6 @@
 import React, { useEffect } from "react";
 import useMovie from "./useMovie";
+import profileImage from "./profile.jpg";
 
 function Movieslist() {
   const { filteredMovies, movies, setMovies } = useMovie();
@@ -21,14 +22,18 @@ function Movieslist() {
             className="flex slide-up-fade-in justify-content-between"
             style={{ borderBottom: "2px solid var(--primary-color)" }}
           >
-            <div>
-              <img
-                alt="not found"
-                width={"250px"}
-                src={URL.createObjectURL(movie.selectedImage)}
-              />
-              <br />
-            </div>
+            {movie.selectedImage ? (
+              <div>
+                <img
+                  alt="not found"
+                  width={"250px"}
+                  src={URL.createObjectURL(movie.selectedImage)}
+                />
+                <br />
+              </div>
+            ) : (
+              <img alt="not found" width={"250px"} src={profileImage} />
+            )}
             <div className="layout-column w-40">
               {/* use this header for movie name */}
               <h3 className="my-3">{movie.name}</h3>

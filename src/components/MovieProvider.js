@@ -7,7 +7,7 @@ export const MovieProvider = ({ children }) => {
   // const [filtered, setFiltered] = useState([]);
   const [query, setQuery] = useState("");
 
-  const handleAddMovie = (movieName, rating, duration, selectedImage) => {
+  const handleAddMovie = (movieName, rating, duration, selectedImage = "") => {
     setMovies((movies) => [
       ...movies,
       {
