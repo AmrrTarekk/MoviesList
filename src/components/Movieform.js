@@ -1,5 +1,6 @@
 import React, { useEffect, useRef, useState } from "react";
 import useMovie from "./useMovie";
+import TestImage from "./TestImage";
 
 const EMAIL_REGEX =
   /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
@@ -15,6 +16,8 @@ function Movieform() {
   const [duration, setDuration] = useState("");
   const [err, setErr] = useState(false);
   const { handleAddMovie } = useMovie();
+  const [selectedImage, setSelectedImage] = useState(null);
+  const [imageSrc, setImagSrc] = useState("");
 
   // const handleSubmit = (e) => {
   //   e.preventDefault();
@@ -39,7 +42,8 @@ function Movieform() {
       setErr(true);
       return;
     }
-    handleAddMovie(movieName, rating, duration);
+    // console.log(imageSrc);
+    handleAddMovie(movieName, rating, duration, selectedImage);
     console.log(movieName, rating, duration);
     setMovieName("");
     setRate("");
@@ -127,7 +131,37 @@ function Movieform() {
               Please specify time in hours or minutes (e.g. 2.5h or 150m)
             </div>
           )}
+          {/* Testing Image */}
+          <div>
+            <h1>Upload and Display Image usign React Hook's</h1>
 
+            {selectedImage && (
+              <div>
+                <img
+                  alt="not found"
+                  width={"250px"}
+                  src={URL.createObjectURL(selectedImage)}
+                />
+                <br />
+                <button onClick={() => setSelectedImage(null)}>Remove</button>
+              </div>
+            )}
+
+            <br />
+            <br />
+
+            {!selectedImage && (
+              <input
+                type="file"
+                name="myImage"
+                onChange={(event) => {
+                  console.log(event.target.files[0]);
+                  setSelectedImage(event.target.files[0]);
+                }}
+              />
+            )}
+          </div>
+          {/* 0000000000000000000000000 */}
           <div className="layout-row justify-content-end">
             <button type="submit" className="mx-0" data-testid="addButton">
               Add Movie

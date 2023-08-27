@@ -7,7 +7,7 @@ export const MovieProvider = ({ children }) => {
   // const [filtered, setFiltered] = useState([]);
   const [query, setQuery] = useState("");
 
-  const handleAddMovie = (movieName, rating, duration) => {
+  const handleAddMovie = (movieName, rating, duration, selectedImage) => {
     setMovies((movies) => [
       ...movies,
       {
@@ -15,6 +15,7 @@ export const MovieProvider = ({ children }) => {
         rating,
         duration,
         id: crypto.randomUUID(),
+        selectedImage,
       },
     ]);
     console.log(movies, "moviesContext");

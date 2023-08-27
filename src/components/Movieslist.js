@@ -21,6 +21,14 @@ function Movieslist() {
             className="flex slide-up-fade-in justify-content-between"
             style={{ borderBottom: "2px solid var(--primary-color)" }}
           >
+            <div>
+              <img
+                alt="not found"
+                width={"250px"}
+                src={URL.createObjectURL(movie.selectedImage)}
+              />
+              <br />
+            </div>
             <div className="layout-column w-40">
               {/* use this header for movie name */}
               <h3 className="my-3">{movie.name}</h3>
